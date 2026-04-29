@@ -796,16 +796,22 @@
         }
         
         function selectEnglishVoice(voices) {
-            if (!voices || voices.length === 0) return;
+            if (!voices || voices.length === 0) {
+                englishVoice = null;
+                return;
+            }
             
             // 安卓优先选择 Google 英文语音
             englishVoice = voices.find(v => v.name && v.name.includes('Google US English')) ||
                           voices.find(v => v.lang && v.lang === 'en-US') ||
                           voices.find(v => v.lang && v.lang.startsWith('en')) ||
-                          voices.find(v => v.name && v.name.includes('English')) ||
-                          voices[0];
+                          voices.find(v => v.name && v.name.includes('English'));
             
-            if (englishVoice) {
+            // 如果没找到合适的英文语音，不设 voice（让系统用默认）
+            if (!englishVoice) {
+                console.log('No English voice found, using system default');
+                englishVoice = null;
+            } else {
                 console.log('Selected voice:', englishVoice.name, englishVoice.lang);
             }
         }
@@ -874,9 +880,17 @@
                     utterance.pitch = pitch;
                     utterance.volume = 1;
                     
-                    // 使用已选择的英文语音
-                    if (englishVoice) {
-                        utterance.voice = englishVoice;
+                    let retryCount = 0;
+                    const maxRetries = 1;
+                    
+                    function doSpeak() {
+                        // 只在重试时设置 voice；首次尝试用系统默认语音
+                        if (retryCount > 0 && englishVoice) {
+                            utterance.voice = englishVoice;
+                            console.log('Retry with voice:', englishVoice.name);
+                        }
+                        
+                        window.speechSynthesis.speak(utterance);
                     }
                     
                     // 调试回调
@@ -887,13 +901,21 @@
                         console.log('Speech ended:', text);
                     };
                     utterance.onerror = function(e) {
-                        console.log('Speech error:', e.error, text);
-                        if (e.error === 'not-allowed' || e.error === 'synthesis-failed') {
+                        console.log('Speech error:', e.error, text, 'retry:', retryCount);
+                        
+                        // 如果是 voice 相关错误，尝试重试（不设 voice 或用其他 voice）
+                        if ((e.error === 'synthesis-failed' || e.error === 'voice-unavailable') && retryCount < maxRetries) {
+                            retryCount++;
+                            // 清除 voice 重试
+                            utterance.voice = null;
+                            setTimeout(() => doSpeak(), 100);
+                        } else if (e.error === 'not-allowed' || (retryCount >= maxRetries && e.error === 'synthesis-failed')) {
+                            // 真正不可用才播放 beep
                             playFallbackBeep();
                         }
                     };
                     
-                    window.speechSynthesis.speak(utterance);
+                    doSpeak();
                     
                     // 安卓 Chrome 有个 bug：speak 后不会自动播放，需要 "唤醒"
                     if (/Android/i.test(navigator.userAgent)) {
@@ -947,7 +969,23 @@
                     utterance.rate = 0.9;
                     utterance.pitch = 1;
                     utterance.volume = 1;
-                    window.speechSynthesis.speak(utterance);
+                    
+                    let retryCount = 0;
+                    const maxRetries = 1;
+                    
+                    function doSpeakCn() {
+                        window.speechSynthesis.speak(utterance);
+                    }
+                    
+                    utterance.onerror = function(e) {
+                        console.log('Chinese speech error:', e.error, text, 'retry:', retryCount);
+                        if (e.error === 'synthesis-failed' && retryCount < maxRetries) {
+                            retryCount++;
+                            setTimeout(() => doSpeakCn(), 100);
+                        }
+                    };
+                    
+                    doSpeakCn();
                     
                     // 安卓唤醒机制
                     if (/Android/i.test(navigator.userAgent)) {
