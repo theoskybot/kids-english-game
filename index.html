@@ -837,100 +837,74 @@
             }
         }
 
-        // ========== 语音功能（增强兼容性）==========
+        // ========== 语音功能（增强兼容性，iOS 用本地 TTS，安卓用在线音频）==========
         function speak(text, rate, pitch) {
             rate = rate || 0.8;
             pitch = pitch || 1.2;
             console.log('Speak:', text);
 
+            // 如果没有 speechSynthesis 支持，直接走在线音频
             if (!('speechSynthesis' in window)) {
-                console.log('No speechSynthesis support');
-                playFallbackBeep();
-                return false;
+                console.log('No speechSynthesis, using online TTS');
+                playOnlineTTS(text);
+                return;
             }
 
-            // 确保音频已启用（需要用户手势）
-            if (!isAudioEnabled) {
-                enableAudio();
+            // 确保音频已启用
+            if (!isAudioEnabled) enableAudio();
+
+            // 检查是否有可用的英文语音
+            var hasEnVoice = hasEnglishVoice();
+            console.log('Has English voice:', hasEnVoice);
+
+            // 如果没有英文语音（常见于中文安卓手机），直接用在线音频
+            if (!hasEnVoice) {
+                console.log('No English voice found, using online TTS');
+                playOnlineTTS(text);
+                return;
             }
 
-            // 重新获取最新语音列表（某些浏览器动态变化）
-            if (!englishVoice) {
-                const freshVoices = window.speechSynthesis.getVoices();
-                if (freshVoices && freshVoices.length > 0) {
-                    selectEnglishVoice(freshVoices);
-                }
-            }
-
+            // 有英文语音，使用本地 speechSynthesis
             try {
-                // 关键修复：先 cancel 清空队列，避免 Chrome 卡住
                 window.speechSynthesis.cancel();
-
                 setTimeout(function() {
                     var utterance = new SpeechSynthesisUtterance(text);
                     utterance.lang = 'en-US';
                     utterance.rate = rate;
                     utterance.pitch = pitch;
                     utterance.volume = 1;
-
-                    // 始终尝试设置一个可用的语音（修复核心问题）
                     if (englishVoice) {
                         utterance.voice = englishVoice;
                     }
-
                     var hasStarted = false;
-                    var hasEnded = false;
-
                     utterance.onstart = function() {
                         hasStarted = true;
                         console.log('Speech started:', text);
                     };
                     utterance.onend = function() {
-                        hasEnded = true;
                         console.log('Speech ended:', text);
                     };
                     utterance.onerror = function(e) {
-                        console.log('Speech error:', e.error, e.message);
-                        // canceled/interrupted 是正常情况（快速切换时），不算失败
-                        if (e.error === 'canceled' || e.error === 'interrupted') {
-                            return;
-                        }
-                        // 如果是 voice 问题，尝试清除 voice 重试
-                        if (!hasStarted && (e.error === 'synthesis-failed' || e.error === 'voice-unavailable')) {
-                            console.log('Retrying without specific voice...');
-                            window.speechSynthesis.cancel();
-                            setTimeout(function() {
-                                var retry = new SpeechSynthesisUtterance(text);
-                                retry.lang = 'en-US';
-                                retry.rate = rate;
-                                retry.pitch = pitch;
-                                retry.volume = 1;
-                                // 不设置 voice，使用系统默认
-                                window.speechSynthesis.speak(retry);
-                            }, 100);
-                        } else if (!hasStarted) {
-                            playFallbackBeep();
+                        console.log('Speech error:', e.error);
+                        if (e.error === 'canceled' || e.error === 'interrupted') return;
+                        // 本地 TTS 失败，回退到在线音频
+                        if (!hasStarted) {
+                            console.log('Local TTS failed, fallback to online');
+                            playOnlineTTS(text);
                         }
                     };
-
                     window.speechSynthesis.speak(utterance);
-
-                    // Chrome 安全机制：utterance 有时会被静默丢弃，加一个守护检查
+                    // 守护检查：如果 500ms 后还没开始，尝试在线音频
                     setTimeout(function() {
-                        if (!hasStarted && !hasEnded) {
-                            console.log('Speech may be blocked, trying resume...');
-                            if (window.speechSynthesis.paused) {
-                                window.speechSynthesis.resume();
-                            }
+                        if (!hasStarted) {
+                            console.log('Speech silent, fallback to online TTS');
+                            playOnlineTTS(text);
                         }
-                    }, 300);
+                    }, 500);
                 }, 50);
-
-                return true;
             } catch (e) {
                 console.log('Speak exception:', e);
-                playFallbackBeep();
-                return false;
+                playOnlineTTS(text);
             }
         }
 
@@ -951,9 +925,69 @@
             }
         }
 
+        // 为每个单词预生成有道词典音频 URL（英式发音）
+        function getYoudaoAudioUrl(word) {
+            return 'https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(word) + '&type=1';
+        }
+
+        // 检测是否有可用的英文 TTS 语音
+        function hasEnglishVoice() {
+            if (!('speechSynthesis' in window)) return false;
+            var voices = window.speechSynthesis.getVoices();
+            if (!voices || voices.length === 0) return false;
+            return voices.some(function(v) {
+                return v.lang && (v.lang.startsWith('en') || (v.name && v.name.toLowerCase().indexOf('english') !== -1));
+            });
+        }
+
+        // 使用在线音频播放单词发音（有道词典，安卓后备方案）
+        var currentAudioPlayer = null;
+        function playOnlineTTS(word, onComplete) {
+            try {
+                // 停止之前的音频
+                if (currentAudioPlayer) {
+                    currentAudioPlayer.pause();
+                    currentAudioPlayer = null;
+                }
+                var audio = new Audio(getYoudaoAudioUrl(word));
+                currentAudioPlayer = audio;
+                audio.oncanplay = function() {
+                    console.log('Online audio ready:', word);
+                };
+                audio.onended = function() {
+                    console.log('Online audio ended:', word);
+                    if (onComplete) onComplete();
+                };
+                audio.onerror = function(e) {
+                    console.log('Online audio error:', word, e);
+                    // 在线音频也失败时才播放 beep
+                    playFallbackBeep();
+                };
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(e) {
+                        console.log('Online audio play rejected:', word, e);
+                        // 被浏览器阻止（未交互），播放 beep 提示
+                        playFallbackBeep();
+                    });
+                }
+                return true;
+            } catch (e) {
+                console.log('Online TTS exception:', e);
+                playFallbackBeep();
+                return false;
+            }
+        }
+
         function speakChinese(text) {
             if (!('speechSynthesis' in window)) return;
             if (!isAudioEnabled) enableAudio();
+            // 中文语音在安卓上可能也不可用，但先尝试本地
+            var hasCnVoice = hasEnglishVoice(); // 复用检测：只要有语音引擎就行
+            if (!hasCnVoice) {
+                console.log('No TTS engine, skip Chinese speech');
+                return;
+            }
             try {
                 window.speechSynthesis.cancel();
                 setTimeout(function() {
@@ -1323,19 +1357,18 @@
 
         // ========== 初始化 ==========
         function startGame() {
-            // 启用音频系统（关键：需要用户手势触发）
             enableAudio();
-
-            // 所有平台统一处理：强制加载语音并预热
             console.log('Platform:', navigator.userAgent);
+
+            // 加载语音列表并检测
             loadVoices();
             setTimeout(function() {
-                if (!englishVoice) {
-                    // 如果没找到语音，再试一次
-                    var v = window.speechSynthesis.getVoices();
-                    selectEnglishVoice(v);
+                var hasEn = hasEnglishVoice();
+                console.log('English voice available:', hasEn);
+                if (!hasEn) {
+                    console.log('Will use online TTS (Youdao) for pronunciation');
                 }
-                // 播放一个极短的空白utterance来"激活"语音引擎
+                // 预热音频系统
                 if ('speechSynthesis' in window) {
                     var warm = new SpeechSynthesisUtterance('');
                     warm.volume = 0;
@@ -1344,15 +1377,11 @@
                 }
             }, 200);
 
-            // 隐藏启动页
             document.getElementById('startScreen').classList.add('hidden');
-
-            // 初始化游戏内容
             initMatchGame();
             initReadGame();
             initSpellGame();
 
-            // 播放欢迎语（延迟确保音频就绪）
             setTimeout(function() {
                 speak('Welcome to Robot Trip. Let us learn English words.', 0.8, 1.3);
                 showToast('🎮 游戏开始！点击卡片听发音');
