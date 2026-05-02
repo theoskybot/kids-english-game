@@ -751,6 +751,7 @@
         let matchedPairs = 0;
         let currentSpellIndex = 0;
         let filledSlots = [];
+        let celebrationAction = null; // null, 'restart-match', 'next-spell'
 
         // ========== 音频系统（兼容 iOS 和 Android）==========
         let audioContext = null;
@@ -1152,7 +1153,7 @@
                 
                 if (matchedPairs === words.length) {
                     setTimeout(() => {
-                        showCelebration('连连看完成！', '获得 ' + (matchedPairs * 10) + ' 分！');
+                        showCelebration('连连看完成！', '获得 ' + (matchedPairs * 10) + ' 分！', 'restart-match');
                         speak('Congratulations! You did it!', 0.8, 1.4);
                     }, 800);
                 }
@@ -1322,11 +1323,11 @@
                 
                 setTimeout(() => {
                     if (currentSpellIndex < words.length - 1) {
-                        showCelebration('拼对啦！', word.en + ' - ' + word.cn);
+                        showCelebration('拼对啦！', word.en + ' - ' + word.cn, 'next-spell');
                         currentSpellIndex++;
                         loadSpellWord();
                     } else {
-                        showCelebration('全部完成！', '你是拼写小能手！');
+                        showCelebration('全部完成！', '你是拼写小能手！', 'next-spell');
                         speak('Amazing! You are awesome!', 0.8, 1.5);
                         currentSpellIndex = 0;
                         loadSpellWord();
@@ -1345,9 +1346,16 @@
         }
 
         // ========== 庆祝弹窗 ==========
-        function showCelebration(title, subtitle) {
+        function showCelebration(title, subtitle, action) {
+            celebrationAction = action || null;
             document.getElementById('celebrationText').textContent = title;
             document.getElementById('celebrationScore').textContent = subtitle;
+            const btnNext = document.getElementById('btnNext');
+            if (action === 'restart-match') {
+                btnNext.textContent = '🔄 再玩一次';
+            } else {
+                btnNext.textContent = '继续挑战 ➡️';
+            }
             document.getElementById('celebration').classList.add('active');
         }
 
@@ -1410,7 +1418,14 @@
             document.getElementById('btnClear').addEventListener('click', clearSpelling);
             document.getElementById('btnSound').addEventListener('click', playCurrentWord);
             document.getElementById('btnCheck').addEventListener('click', checkSpelling);
-            document.getElementById('btnNext').addEventListener('click', closeCelebration);
+            document.getElementById('btnNext').addEventListener('click', function() {
+                if (celebrationAction === 'restart-match') {
+                    closeCelebration();
+                    initMatchGame();
+                } else {
+                    closeCelebration();
+                }
+            });
 
             // 预加载语音列表
             if ('speechSynthesis' in window) {
