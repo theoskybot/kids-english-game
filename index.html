@@ -768,24 +768,24 @@
 
     <!-- 模块切换 -->
     <div class="module-tabs">
-        <button class="tab-btn active" data-module="match">
-            🎯 连连看
-        </button>
-        <button class="tab-btn" data-module="read">
+        <button class="tab-btn active" data-module="read">
             🔊 读一读
-        </button>
-        <button class="tab-btn" data-module="spell">
-            ✏️ 拼一拼
         </button>
         <button class="tab-btn" data-module="sentence">
             📝 造句乐
+        </button>
+        <button class="tab-btn" data-module="match">
+            🎯 连连看
+        </button>
+        <button class="tab-btn" data-module="spell">
+            ✏️ 拼一拼
         </button>
     </div>
 
     <!-- 游戏区域 -->
     <div class="game-container">
         <!-- 连连看模块 -->
-        <div class="module-section active" id="module-match">
+        <div class="module-section" id="module-match">
             <div class="module-title">🎯 连连看 - 找出配对的单词</div>
             <div class="progress-bar">
                 <div class="progress-fill" id="matchProgress" style="width: 0%"></div>
@@ -794,7 +794,7 @@
         </div>
 
         <!-- 读一读模块 -->
-        <div class="module-section" id="module-read">
+        <div class="module-section active" id="module-read">
             <div class="module-title">🔊 读一读 - 点击卡片听发音</div>
             <div class="cards-grid" id="readCards"></div>
         </div>
@@ -996,7 +996,7 @@
         // ========== 游戏状态 ==========
         let score = 0;
         let stars = 0;
-        let currentModule = 'match';
+        let currentModule = 'read';
         let selectedCard = null;
         let matchedPairs = 0;
         let currentSpellIndex = 0;
