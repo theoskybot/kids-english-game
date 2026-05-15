@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Robot Trip 英语单词大冒险</title>
+    <title>Robot Trip English Adventure</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +23,7 @@
             color: #333;
         }
 
-        /* ========== 启动页 ========== */
+        /* ========== Start Screen ========== */
         .start-screen {
             position: fixed;
             top: 0;
@@ -52,7 +52,7 @@
         .start-btn:active { transform: scale(0.95); }
         .start-hint { font-size: 14px; opacity: 0.8; }
 
-        /* ========== 头部 ========== */
+        /* ========== Header ========== */
         .header {
             background: rgba(255,255,255,0.95); padding: 10px 15px;
             display: flex; justify-content: space-between; align-items: center;
@@ -86,7 +86,7 @@
         .combo-badge.active { opacity: 1; animation: comboPulse 0.5s ease; }
         @keyframes comboPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
 
-        /* ========== 模块切换 ========== */
+        /* ========== Module Tabs ========== */
         .module-tabs {
             display: flex; justify-content: center; gap: 8px; padding: 12px 8px; overflow-x: auto;
         }
@@ -101,13 +101,13 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* ========== 游戏区域 ========== */
+        /* ========== Game Container ========== */
         .game-container { padding: 8px 12px 25px; max-width: 600px; margin: 0 auto; }
         .module-section { display: none; animation: fadeIn 0.5s ease; }
         .module-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ========== 关卡进度条 ========== */
+        /* ========== Level Progress Bar ========== */
         .level-progress-container {
             background: rgba(255,255,255,0.3); border-radius: 15px; padding: 10px 15px;
             margin-bottom: 12px;
@@ -126,7 +126,23 @@
             border-radius: 10px; transition: width 0.5s ease;
         }
 
-        /* ========== 新学/复习标签 ========== */
+        /* ========== Module Progress Bar ========== */
+        .module-progress {
+            background: rgba(255,255,255,0.3); border-radius: 15px; padding: 10px 15px;
+            margin-bottom: 12px; color: white;
+        }
+        .module-progress-info {
+            display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px;
+        }
+        .module-progress-bar {
+            background: rgba(255,255,255,0.3); border-radius: 10px; height: 8px; overflow: hidden;
+        }
+        .module-progress-fill {
+            background: linear-gradient(90deg, #ffd700, #ffb700); height: 100%;
+            border-radius: 10px; transition: width 0.5s ease;
+        }
+
+        /* ========== Content Tabs ========== */
         .content-tabs {
             display: flex; justify-content: center; gap: 8px; margin-bottom: 10px;
         }
@@ -143,7 +159,7 @@
             border-radius: 10px; margin-left: 4px;
         }
 
-        /* ========== 卡片样式 ========== */
+        /* ========== Card Styles ========== */
         .cards-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px;
         }
@@ -169,7 +185,7 @@
             font-size: 9px; padding: 2px 6px; border-radius: 8px; font-weight: bold;
         }
         .card.review-tag::after {
-            content: '复习'; position: absolute; top: 4px; left: 4px;
+            content: 'Review'; position: absolute; top: 4px; left: 4px;
             background: linear-gradient(135deg, #48bb78, #38a169); color: white;
             font-size: 9px; padding: 2px 6px; border-radius: 8px; font-weight: bold;
         }
@@ -190,13 +206,7 @@
         .card-text-en { font-size: 14px; margin-bottom: 2px; }
         .card-text-cn { font-size: 12px; opacity: 0.8; }
 
-        /* ========== 冻结遮罩（防乱点） ========== */
-        .freeze-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,0,0,0.05); border-radius: 18px; pointer-events: all; z-index: 5;
-        }
-
-        /* ========== 读一读模块 ========== */
+        /* ========== Read Module ========== */
         .read-card { position: relative; }
         .read-card .sound-icon {
             position: absolute; top: 6px; right: 6px; font-size: 18px;
@@ -211,7 +221,7 @@
             50% { transform: scale(1.08); box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3); }
         }
 
-        /* ========== 拼一拼模块 ========== */
+        /* ========== Spell Module ========== */
         .spelling-container {
             background: white; border-radius: 25px; padding: 20px 15px;
             margin-top: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -247,7 +257,7 @@
         .btn-sound { background: #bee3f8; color: #2c5282; }
         .control-btn:active { transform: scale(0.95); }
 
-        /* ========== 造句乐模块 ========== */
+        /* ========== Sentence Module ========== */
         .sentence-container {
             background: white; border-radius: 25px; padding: 20px 15px;
             margin-top: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -274,7 +284,7 @@
         .word-btn.used { opacity: 0.3; pointer-events: none; }
         .sentence-controls { display: flex; justify-content: center; gap: 12px; margin-top: 15px; }
 
-        /* ========== 庆祝弹窗 ========== */
+        /* ========== Celebration Modal ========== */
         .celebration {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); display: none; justify-content: center;
@@ -297,7 +307,7 @@
         }
         .btn-next:active { transform: scale(0.95); }
 
-        /* ========== 学习报告弹窗 ========== */
+        /* ========== Report Modal ========== */
         .report-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); display: none; justify-content: center;
@@ -319,7 +329,18 @@
         .mastery-bar { width: 80px; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
         .mastery-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
 
-        /* ========== 粒子/星星动画 ========== */
+        /* ========== History Review Button ========== */
+        .history-btn {
+            position: fixed; bottom: 15px; right: 15px;
+            background: linear-gradient(135deg, #48bb78, #38a169); color: white;
+            border: none; padding: 12px 20px; border-radius: 25px;
+            font-size: 14px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 300;
+            transition: all 0.3s;
+        }
+        .history-btn:active { transform: scale(0.95); }
+
+        /* ========== Animations ========== */
         .star { position: fixed; font-size: 26px; animation: starFloat 1.5s ease forwards; pointer-events: none; z-index: 500; }
         @keyframes starFloat { 0% { transform: translateY(0) scale(0); opacity: 1; } 50% { transform: translateY(-50px) scale(1.2); opacity: 1; } 100% { transform: translateY(-100px) scale(0); opacity: 0; } }
         .particle {
@@ -330,8 +351,6 @@
             0% { transform: translate(0, 0) scale(1); opacity: 1; }
             100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
-
-        /* ========== 连击提示 ========== */
         .combo-popup {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-size: 48px; font-weight: bold; color: #e53e3e; text-shadow: 0 2px 10px rgba(0,0,0,0.3);
@@ -343,8 +362,6 @@
             70% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
             100% { transform: translate(-50%, -80%) scale(0.8); opacity: 0; }
         }
-
-        /* ========== Toast ========== */
         .toast {
             position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
             background: rgba(0,0,0,0.85); color: white; padding: 12px 25px;
@@ -352,16 +369,12 @@
             white-space: nowrap;
         }
         @keyframes toastIn { from { transform: translateX(-50%) translateY(20px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
-
-        /* ========== 引导提示 ========== */
         .guide-hint {
             background: rgba(255,255,255,0.2); border-radius: 15px; padding: 10px 15px;
             margin-bottom: 10px; color: white; font-size: 13px; text-align: center;
             animation: hintPulse 3s ease infinite;
         }
         @keyframes hintPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
-
-        /* ========== 快速点击警告 ========== */
         .spam-warning {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: rgba(229, 62, 62, 0.95); color: white; padding: 20px 30px;
@@ -370,7 +383,7 @@
         }
         @keyframes spamIn { from { transform: translate(-50%, -50%) scale(0); } to { transform: translate(-50%, -50%) scale(1); } }
 
-        /* ========== 响应式 ========== */
+        /* ========== Responsive ========== */
         @media (max-width: 400px) {
             .cards-grid { grid-template-columns: repeat(2, 1fr); }
             .title { font-size: 16px; }
@@ -381,22 +394,22 @@
     </style>
 </head>
 <body>
-    <!-- 启动页 -->
+    <!-- Start Screen -->
     <div class="start-screen" id="startScreen">
         <div class="start-content">
             <div class="start-robot">🤖</div>
             <div class="start-title">Robot Trip</div>
-            <div class="start-subtitle">英语单词大冒险 v2</div>
+            <div class="start-subtitle">English Adventure v2</div>
             <div class="start-emoji">🚗🎈⭕🧸🌈✨</div>
-            <button class="start-btn" id="startBtn">▶️ 开始冒险</button>
-            <div class="start-hint">点击按钮开启声音 🔊</div>
+            <button class="start-btn" id="startBtn">▶️ Start Adventure</button>
+            <div class="start-hint">Tap to enable sound 🔊</div>
             <div style="margin-top:15px;font-size:12px;opacity:0.7;">
-                💡 提示：先听清楚再选择，乱点会扣分哦~
+                💡 Tip: Listen first, then choose. Random taps lose points!
             </div>
         </div>
     </div>
 
-    <!-- 头部 -->
+    <!-- Header -->
     <div class="header">
         <div class="header-left">
             <div class="title"><span class="robot-icon">🤖</span><span>Robot Trip</span></div>
@@ -409,119 +422,162 @@
         </div>
     </div>
 
-    <!-- 模块切换 -->
+    <!-- Module Tabs (English) -->
     <div class="module-tabs">
-        <button class="tab-btn active" data-module="read">🔊 读一读</button>
-        <button class="tab-btn" data-module="sentence">📝 造句乐</button>
-        <button class="tab-btn" data-module="match">🎯 连连看</button>
-        <button class="tab-btn" data-module="spell">✏️ 拼一拼</button>
+        <button class="tab-btn active" data-module="read">🔊 Read</button>
+        <button class="tab-btn" data-module="sentence">📝 Sentence</button>
+        <button class="tab-btn" data-module="match">🎯 Match</button>
+        <button class="tab-btn" data-module="spell">✏️ Spell</button>
     </div>
 
-    <!-- 游戏区域 -->
+    <!-- Game Area -->
     <div class="game-container">
-        <!-- 关卡进度 -->
+
+        <!-- Level Progress (Match only) -->
         <div class="level-progress-container" id="levelProgressContainer">
             <div class="level-info">
-                <span id="levelName">第 1 关</span>
-                <span class="level-target" id="levelTarget">再完成 3 组即可通关！</span>
+                <span id="levelName">Level 1</span>
+                <span class="level-target" id="levelTarget">Finish 3 more pairs to pass!</span>
             </div>
             <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
         </div>
 
-        <!-- 新学/复习/旧内容 切换 -->
-        <div class="content-tabs" id="contentTabs" style="display:none;">
-            <button class="content-tab active" data-filter="all">全部</button>
-            <button class="content-tab" data-filter="new">新学<span class="badge">NEW</span></button>
-            <button class="content-tab" data-filter="review">复习</button>
+        <!-- Spell Progress -->
+        <div class="module-progress" id="spellProgress" style="display:none;">
+            <div class="module-progress-info">
+                <span id="spellProgressText">Word 1 / 8</span>
+                <span id="spellProgressRemain">7 left</span>
+            </div>
+            <div class="module-progress-bar"><div class="module-progress-fill" id="spellProgressFill" style="width:0%"></div></div>
         </div>
 
-        <!-- 连连看 -->
+        <!-- Sentence Progress -->
+        <div class="module-progress" id="sentenceProgress" style="display:none;">
+            <div class="module-progress-info">
+                <span id="sentenceProgressText">Sentence 1 / 12</span>
+                <span id="sentenceProgressRemain">11 left</span>
+            </div>
+            <div class="module-progress-bar"><div class="module-progress-fill" id="sentenceProgressFill" style="width:0%"></div></div>
+        </div>
+
+        <!-- Read Progress -->
+        <div class="module-progress" id="readProgress" style="display:none;">
+            <div class="module-progress-info">
+                <span>📚 Read Aloud Mode</span>
+                <span id="readCount">Tapped: 0</span>
+            </div>
+        </div>
+
+        <!-- Content Filter Tabs -->
+        <div class="content-tabs" id="contentTabs" style="display:none;">
+            <button class="content-tab active" data-filter="all">All</button>
+            <button class="content-tab" data-filter="new">New<span class="badge">NEW</span></button>
+            <button class="content-tab" data-filter="review">Review</button>
+            <button class="content-tab" data-filter="old">Old</button>
+        </div>
+
+        <!-- Match Game -->
         <div class="module-section" id="module-match">
-            <div class="module-title">🎯 连连看 - 先听发音，再找配对</div>
-            <div class="guide-hint" id="matchGuide">👆 点击卡片听发音，再点击另一个找配对</div>
+            <div class="module-title">🎯 Match - Listen first, then find pairs</div>
+            <div class="guide-hint" id="matchGuide">👆 Tap a card to hear, then find its pair</div>
             <div class="cards-grid" id="matchCards"></div>
         </div>
 
-        <!-- 读一读 -->
+        <!-- Read Aloud -->
         <div class="module-section active" id="module-read">
-            <div class="module-title">🔊 读一读 - 点击卡片听发音</div>
-            <div class="guide-hint">📚 绿色=新学，蓝色=复习，多点击新学内容哦~</div>
+            <div class="module-title">🔊 Read - Tap cards to hear pronunciation</div>
+            <div class="guide-hint">📚 Green=New, Blue=Review, focus on new words!</div>
             <div class="cards-grid" id="readCards"></div>
         </div>
 
-        <!-- 拼一拼 -->
+        <!-- Spell Game -->
         <div class="module-section" id="module-spell">
-            <div class="module-title">✏️ 拼一拼 - 拖动字母拼出单词</div>
+            <div class="module-title">✏️ Spell - Drag letters to spell the word</div>
             <div class="spelling-container">
                 <div class="spelling-hint">
                     <div class="spelling-emoji" id="spellEmoji">🚗</div>
-                    <div class="spelling-cn" id="spellCn">一辆小汽车</div>
+                    <div class="spelling-cn" id="spellCn">a small car</div>
                     <div style="font-size:12px;color:#999;margin-top:4px;" id="spellEnHint"></div>
                 </div>
                 <div class="slots-container" id="spellSlots"></div>
                 <div class="letters-pool" id="lettersPool"></div>
                 <div class="spelling-controls">
-                    <button class="control-btn btn-clear" id="btnClear">🗑️ 清除</button>
-                    <button class="control-btn btn-sound" id="btnSound">🔊 听发音</button>
-                    <button class="control-btn btn-check" id="btnCheck">✅ 检查</button>
+                    <button class="control-btn btn-clear" id="btnClear">🗑️ Clear</button>
+                    <button class="control-btn btn-sound" id="btnSound">🔊 Listen</button>
+                    <button class="control-btn btn-check" id="btnCheck">✅ Check</button>
                 </div>
             </div>
         </div>
 
-        <!-- 造句乐 -->
+        <!-- Sentence Game -->
         <div class="module-section" id="module-sentence">
-            <div class="module-title">📝 造句乐 - 把单词组成正确句子</div>
+            <div class="module-title">📝 Sentence - Build correct sentences</div>
             <div class="sentence-container">
                 <div class="sentence-hint">
                     <div class="sentence-scene" id="sentenceScene">🚗</div>
-                    <div class="sentence-cn" id="sentenceCn">一辆小的汽车</div>
+                    <div class="sentence-cn" id="sentenceCn">a small car</div>
                 </div>
                 <div class="sentence-slots" id="sentenceSlots"></div>
                 <div class="sentence-pool" id="sentencePool"></div>
                 <div class="sentence-controls">
-                    <button class="control-btn btn-clear" id="btnSentenceClear">🗑️ 清除</button>
-                    <button class="control-btn btn-sound" id="btnSentenceSound">🔊 听句子</button>
-                    <button class="control-btn btn-check" id="btnSentenceCheck">✅ 检查</button>
+                    <button class="control-btn btn-clear" id="btnSentenceClear">🗑️ Clear</button>
+                    <button class="control-btn btn-sound" id="btnSentenceSound">🔊 Listen</button>
+                    <button class="control-btn btn-check" id="btnSentenceCheck">✅ Check</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 庆祝弹窗 -->
+    <!-- Celebration Modal -->
     <div class="celebration" id="celebration">
         <div class="celebration-content">
             <div class="celebration-emoji" id="celebrationEmoji">🎉</div>
-            <div class="celebration-text" id="celebrationText">太棒了！</div>
+            <div class="celebration-text" id="celebrationText">Great job!</div>
             <div class="celebration-score" id="celebrationScore"></div>
             <div class="celebration-stars" id="celebrationStars"></div>
-            <button class="btn-next" id="btnNext">继续挑战 ➡️</button>
+            <button class="btn-next" id="btnNext">Continue ➡️</button>
         </div>
     </div>
 
-    <!-- 学习报告弹窗 -->
+    <!-- Report Modal -->
     <div class="report-modal" id="reportModal">
         <div class="report-content">
-            <div class="report-title">📊 学习报告</div>
-            <div class="report-stat"><span class="report-stat-label">总积分</span><span class="report-stat-value" id="reportScore">0</span></div>
-            <div class="report-stat"><span class="report-stat-label">获得星星</span><span class="report-stat-value" id="reportStars">0</span></div>
-            <div class="report-stat"><span class="report-stat-label">当前等级</span><span class="report-stat-value" id="reportLevel">Lv.1</span></div>
-            <div class="report-stat"><span class="report-stat-label">最高连击</span><span class="report-stat-value" id="reportCombo">0</span></div>
-            <div class="report-stat"><span class="report-stat-label">新学单词</span><span class="report-stat-value" id="reportNewWords">0</span></div>
+            <div class="report-title">📊 Learning Report</div>
+            <div class="report-stat"><span class="report-stat-label">Total Score</span><span class="report-stat-value" id="reportScore">0</span></div>
+            <div class="report-stat"><span class="report-stat-label">Stars</span><span class="report-stat-value" id="reportStars">0</span></div>
+            <div class="report-stat"><span class="report-stat-label">Level</span><span class="report-stat-value" id="reportLevel">Lv.1</span></div>
+            <div class="report-stat"><span class="report-stat-label">Best Combo</span><span class="report-stat-value" id="reportCombo">0</span></div>
+            <div class="report-stat"><span class="report-stat-label">New Words</span><span class="report-stat-value" id="reportNewWords">0</span></div>
             <div class="report-words">
-                <div class="report-words-title">🎯 需要加强的单词</div>
+                <div class="report-words-title">🎯 Words to Improve</div>
                 <div id="reportWeakWords"></div>
             </div>
             <div style="margin-top:15px;">
-                <button class="btn-next" id="btnCloseReport">继续学习 ➡️</button>
+                <button class="btn-next" id="btnCloseReport">Continue ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Review Button -->
+    <button class="history-btn" id="historyBtn">📚 History</button>
+
+    <!-- History Review Modal -->
+    <div class="report-modal" id="historyModal">
+        <div class="report-content">
+            <div class="report-title">📚 All Words</div>
+            <div style="font-size:13px;color:#666;margin-bottom:10px;">Tap any word to hear it!</div>
+            <div id="historyWordsList" style="max-height:50vh;overflow-y:auto;text-align:left;"></div>
+            <div style="margin-top:15px;">
+                <button class="btn-next" id="btnCloseHistory">Close</button>
             </div>
         </div>
     </div>
 
     <script>
         // ============================================================
-        // 单词数据 - 区分新学 / 复习 / 旧内容
+        // Word Data - New / Review / Old
         // ============================================================
-        // 5.15 新学内容（短语 + seven 系列）
+        // 5.15 New content (phrases + seven series)
         const words_new = [
             { en: 'a small car', cn: '一辆小的汽车', emoji: '🚗', speak: 'a small car', category: 'new' },
             { en: 'a big car', cn: '一辆大的汽车', emoji: '🚙', speak: 'a big car', category: 'new' },
@@ -534,7 +590,7 @@
             { en: 'seven teddy bears', cn: '七只泰迪熊', emoji: '🧸7️⃣', speak: 'seven teddy bears', category: 'new' },
         ];
 
-        // 上一节课内容（复习）- this/that + 颜色 + 玩具
+        // Previous lesson (review)
         const words_review = [
             { en: 'this', cn: '这个（近的）', emoji: '👇', speak: 'this', category: 'review' },
             { en: 'that', cn: '那个（远的）', emoji: '👉', speak: 'that', category: 'review' },
@@ -548,7 +604,7 @@
             { en: 'ball', cn: '球', emoji: '⚽', speak: 'ball', category: 'review' },
         ];
 
-        // 更早学过的内容（少量混入）
+        // Older content
         const words_old = [
             { en: 'toy store', cn: '玩具商店', emoji: '🧸', speak: 'toy store', category: 'old' },
             { en: 'elephant', cn: '大象', emoji: '🐘', speak: 'elephant', category: 'old' },
@@ -568,14 +624,13 @@
             { en: 'pink', cn: '粉色', emoji: '🩷', speak: 'pink', category: 'old' },
         ];
 
-        // 合并所有单词
         const allWords = [...words_new, ...words_review, ...words_old];
 
         // ============================================================
-        // 智能调度器：根据熟练度选择单词
+        // Smart Scheduler
         // ============================================================
         const SmartScheduler = {
-            mastery: {}, // word.en -> {correct, wrong, lastSeen}
+            mastery: {},
             load() {
                 try {
                     const saved = localStorage.getItem('robotTrip_mastery');
@@ -598,48 +653,36 @@
                 m.wrong++; m.streak = 0; m.lastSeen = Date.now();
                 this.mastery[wordEn] = m; this.save();
             },
-            // 计算单词的"需要练习程度"（越高越需要出现）
             needScore(word) {
                 const m = this.getMastery(word.en);
                 const base = word.category === 'new' ? 80 : word.category === 'review' ? 50 : 20;
                 const wrongPenalty = m.wrong * 15;
                 const correctBonus = Math.min(m.correct * 8, 40);
-                const timeDecay = Math.max(0, (Date.now() - m.lastSeen) / (1000 * 60 * 60 * 24)) * 2; // 每天+2分
+                const timeDecay = Math.max(0, (Date.now() - m.lastSeen) / (1000 * 60 * 60 * 24)) * 2;
                 return base + wrongPenalty - correctBonus + timeDecay;
             },
-            // 为关卡选择单词：新学60% + 复习30% + 旧内容10%，但优先熟练度低的
             selectForLevel(count, filter) {
                 let pool = allWords;
                 if (filter === 'new') pool = words_new;
                 else if (filter === 'review') pool = words_review;
                 else if (filter === 'old') pool = words_old;
-                
-                // 按 needScore 排序（高的在前面）
                 const scored = pool.map(w => ({ word: w, score: this.needScore(w) }));
                 scored.sort((a, b) => b.score - a.score);
-                
                 if (filter !== 'all') return scored.slice(0, count).map(s => s.word);
-                
-                // all模式：按比例抽取，但优先熟练度低的
                 const selected = [];
                 const newWords = scored.filter(s => s.word.category === 'new');
                 const reviewWords = scored.filter(s => s.word.category === 'review');
                 const oldWords = scored.filter(s => s.word.category === 'old');
-                
                 const newCount = Math.ceil(count * 0.6);
                 const reviewCount = Math.ceil(count * 0.3);
                 const oldCount = Math.max(1, count - newCount - reviewCount);
-                
                 selected.push(...newWords.slice(0, newCount).map(s => s.word));
                 selected.push(...reviewWords.slice(0, reviewCount).map(s => s.word));
                 selected.push(...oldWords.slice(0, oldCount).map(s => s.word));
-                
-                // 如果不够，从全部补齐
                 while (selected.length < count && scored.length > 0) {
                     const next = scored.find(s => !selected.includes(s.word));
                     if (next) selected.push(next.word); else break;
                 }
-                
                 return selected.slice(0, count);
             },
             getWeakWords(limit) {
@@ -663,7 +706,7 @@
         };
 
         // ============================================================
-        // 句型数据（对应 5.15 新学内容）
+        // Sentence Data
         // ============================================================
         const sentences = [
             { cn: '一辆小的汽车', scene: '🔹🚗', words: ['a', 'small', 'car'], speak: 'a small car' },
@@ -674,7 +717,6 @@
             { cn: '七个气球', scene: '🎈7️⃣', words: ['seven', 'balloons'], speak: 'seven balloons' },
             { cn: '七个圆圈', scene: '⭕7️⃣', words: ['seven', 'circles'], speak: 'seven circles' },
             { cn: '七只泰迪熊', scene: '🧸7️⃣', words: ['seven', 'teddy', 'bears'], speak: 'seven teddy bears' },
-            // 复习句型
             { cn: '这是一个小球', scene: '🔹⚽', words: ['This', 'is', 'a', 'small', 'ball'], speak: 'This is a small ball' },
             { cn: '那是一个大球', scene: '🔷⚽', words: ['That', 'is', 'a', 'big', 'ball'], speak: 'That is a big ball' },
             { cn: '我喜欢绿色的滑板车', scene: '🛴🟢', words: ['I', 'like', 'the', 'green', 'scooter'], speak: 'I like the green scooter' },
@@ -683,10 +725,10 @@
         ];
 
         // ============================================================
-        // 玩家档案（本地存储）
+        // Player Profile
         // ============================================================
         const PlayerProfile = {
-            data: { name: '小朋友', totalStars: 0, level: 1, xp: 0, maxCombo: 0, sessions: 0 },
+            data: { name: 'Kid', totalStars: 0, level: 1, xp: 0, maxCombo: 0, sessions: 0 },
             load() {
                 try {
                     const saved = localStorage.getItem('robotTrip_profile');
@@ -702,7 +744,7 @@
                 if (newLevel > this.data.level) {
                     this.data.level = newLevel;
                     this.save();
-                    return true; // 升级了
+                    return true;
                 }
                 this.save();
                 return false;
@@ -713,22 +755,23 @@
         };
 
         // ============================================================
-        // 游戏状态
+        // Game State
         // ============================================================
         let score = 0, stars = 0, currentModule = 'read', selectedCard = null;
         let matchedPairs = 0, currentSpellIndex = 0, filledSlots = [];
         let celebrationAction = null;
         let currentSentenceIndex = 0, filledSentenceSlots = [];
-        let currentLevelWords = []; // 当前关卡使用的单词
-        let contentFilter = 'all'; // all | new | review
+        let currentLevelWords = [];
+        let contentFilter = 'all';
         let combo = 0, lastCorrectTime = 0;
-        let isFrozen = false; // 防乱点冻结
-        let clickTimestamps = []; // 记录点击时间，检测乱点
-        let levelTarget = 3; // 当前关卡目标对数
-        let levelCurrent = 0; // 当前完成数
+        let isFrozen = false;
+        let clickTimestamps = [];
+        let levelTarget = 3;
+        let levelCurrent = 0;
+        let readTapCount = 0; // count taps in Read mode
 
         // ============================================================
-        // 音频系统
+        // Audio System
         // ============================================================
         let audioContext = null, isAudioEnabled = false, voicesLoaded = false, englishVoice = null;
 
@@ -821,21 +864,9 @@
                 osc.start(); osc.stop(audioContext.currentTime + 0.1);
             } catch(e) {}
         }
-        function speakChinese(text) {
-            if (!('speechSynthesis' in window)) return;
-            if (!isAudioEnabled) enableAudio();
-            try {
-                window.speechSynthesis.cancel();
-                setTimeout(function() {
-                    var u = new SpeechSynthesisUtterance(text); u.lang = 'zh-CN';
-                    u.rate = 0.9; u.pitch = 1; u.volume = 1;
-                    window.speechSynthesis.speak(u);
-                }, 50);
-            } catch(e) {}
-        }
 
         // ============================================================
-        // 积分 & 连击 & 防乱点系统
+        // Score & Combo & Anti-Spam
         // ============================================================
         function addScore(points, x, y) {
             score += points;
@@ -851,11 +882,11 @@
         }
         function addCombo() {
             const now = Date.now();
-            if (now - lastCorrectTime < 5000) { // 5秒内连续正确算连击
+            if (now - lastCorrectTime < 5000) {
                 combo++;
                 if (combo >= 3) {
                     showComboPopup(combo);
-                    addScore(combo * 2); // 连击额外奖励
+                    addScore(combo * 2);
                 }
             } else {
                 combo = 1;
@@ -892,7 +923,7 @@
         }
         function showComboPopup(n) {
             const popup = document.createElement('div'); popup.className = 'combo-popup';
-            popup.textContent = '🔥 x' + n + ' 连击!';
+            popup.textContent = '🔥 x' + n + ' Combo!';
             document.body.appendChild(popup); setTimeout(() => popup.remove(), 1000);
         }
         function showToast(msg) {
@@ -902,35 +933,30 @@
         }
 
         // ============================================================
-        // 防乱点检测
+        // Anti-Spam Detection
         // ============================================================
         function recordClick() {
             const now = Date.now();
             clickTimestamps.push(now);
-            // 只保留最近3秒的记录
             clickTimestamps = clickTimestamps.filter(t => now - t < 3000);
-            // 3秒内超过5次点击且无正确匹配 = 乱点
             if (clickTimestamps.length >= 5) {
                 showSpamWarning();
-                return true; // 是乱点
+                return true;
             }
             return false;
         }
         function showSpamWarning() {
-            // 冻结1.5秒
             freezeGame(1500);
             const warn = document.createElement('div'); warn.className = 'spam-warning';
-            warn.innerHTML = '🐢 慢一点~<br><span style="font-size:14px;font-weight:normal;">先听清楚，再想一想</span>';
+            warn.innerHTML = '🐢 Slow down!<br><span style="font-size:14px;font-weight:normal;">Listen first, then think</span>';
             document.body.appendChild(warn);
             speak('Slow down and think', 0.8, 1);
             setTimeout(() => warn.remove(), 1500);
-            // 扣一点分作为 gentle 惩罚
             if (score > 0) { score = Math.max(0, score - 2); document.getElementById('score').textContent = score; }
             resetCombo();
         }
         function freezeGame(ms) {
             isFrozen = true;
-            // 给所有卡片区域加冻结遮罩
             document.querySelectorAll('.cards-grid, .letters-pool, .sentence-pool').forEach(el => {
                 el.style.pointerEvents = 'none';
             });
@@ -943,23 +969,45 @@
         }
 
         // ============================================================
-        // 关卡进度
+        // Level Progress
         // ============================================================
         function updateLevelProgress() {
             const pct = Math.min(100, (levelCurrent / levelTarget) * 100);
             document.getElementById('progressFill').style.width = pct + '%';
             const remaining = Math.max(0, levelTarget - levelCurrent);
             document.getElementById('levelTarget').textContent = remaining > 0
-                ? '再完成 ' + remaining + ' 组即可通关！' : '关卡完成！🎉';
-            document.getElementById('levelName').textContent = '第 ' + PlayerProfile.data.level + ' 关';
+                ? 'Finish ' + remaining + ' more pairs to pass!' : 'Level Complete! 🎉';
+            document.getElementById('levelName').textContent = 'Level ' + PlayerProfile.data.level;
             document.getElementById('levelBadge').textContent = 'Lv.' + PlayerProfile.data.level;
         }
+
+        // Module progress updates
+        function updateSpellProgress() {
+            const total = currentLevelWords.length;
+            const current = currentSpellIndex + 1;
+            const pct = Math.min(100, ((currentSpellIndex) / total) * 100);
+            document.getElementById('spellProgressText').textContent = 'Word ' + current + ' / ' + total;
+            document.getElementById('spellProgressRemain').textContent = (total - currentSpellIndex) + ' left';
+            document.getElementById('spellProgressFill').style.width = pct + '%';
+        }
+        function updateSentenceProgress() {
+            const total = currentLevelWords.length;
+            const current = currentSentenceIndex + 1;
+            const pct = Math.min(100, ((currentSentenceIndex) / total) * 100);
+            document.getElementById('sentenceProgressText').textContent = 'Sentence ' + current + ' / ' + total;
+            document.getElementById('sentenceProgressRemain').textContent = (total - currentSentenceIndex) + ' left';
+            document.getElementById('sentenceProgressFill').style.width = pct + '%';
+        }
+        function updateReadProgress() {
+            document.getElementById('readCount').textContent = 'Tapped: ' + readTapCount;
+        }
+
         function onLevelComplete() {
             const starsEarned = combo >= 5 ? 3 : combo >= 3 ? 2 : 1;
             const leveledUp = PlayerProfile.addXP(30 + starsEarned * 10);
             showCelebration(
-                leveledUp ? '🎉 升级啦！' : '关卡完成！',
-                '获得 ' + (30 + starsEarned * 10) + ' 经验值' + (leveledUp ? '，升级到 Lv.' + PlayerProfile.data.level + '！' : ''),
+                leveledUp ? '🎉 Level Up!' : 'Level Complete!',
+                'Earned ' + (30 + starsEarned * 10) + ' XP' + (leveledUp ? ', now Lv.' + PlayerProfile.data.level + '!' : ''),
                 'restart-match',
                 '⭐'.repeat(starsEarned)
             );
@@ -967,7 +1015,7 @@
         }
 
         // ============================================================
-        // 模块切换
+        // Module Switch
         // ============================================================
         function switchModule(module) {
             currentModule = module;
@@ -977,16 +1025,27 @@
             document.querySelectorAll('.module-section').forEach(s => s.classList.remove('active'));
             document.getElementById('module-' + module).classList.add('active');
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-            // 显示/隐藏内容筛选标签
+            
+            // Show/hide content filter tabs
             document.getElementById('contentTabs').style.display = (module === 'read' || module === 'match') ? 'flex' : 'none';
+            
+            // Show/hide progress bars per module
+            document.getElementById('levelProgressContainer').style.display = (module === 'match') ? 'block' : 'none';
+            document.getElementById('spellProgress').style.display = (module === 'spell') ? 'block' : 'none';
+            document.getElementById('sentenceProgress').style.display = (module === 'sentence') ? 'block' : 'none';
+            document.getElementById('readProgress').style.display = (module === 'read') ? 'block' : 'none';
+            
+            // Update progress when switching
+            if (module === 'spell') updateSpellProgress();
+            if (module === 'sentence') updateSentenceProgress();
+            if (module === 'read') updateReadProgress();
         }
 
         // ============================================================
-        // 连连看模块（关卡制 + 防乱点）
+        // Match Game
         // ============================================================
         function initMatchGame() {
             const container = document.getElementById('matchCards'); container.innerHTML = '';
-            // 根据关卡选择单词
             const count = Math.min(6, 3 + Math.floor(PlayerProfile.data.level / 2));
             levelTarget = count; levelCurrent = 0;
             currentLevelWords = SmartScheduler.selectForLevel(count, contentFilter);
@@ -1015,27 +1074,25 @@
         }
         function onMatchCardClick(card, event) {
             if (isFrozen || card.classList.contains('matched')) return;
-            if (recordClick()) return; // 检测到乱点
+            if (recordClick()) return;
 
             const word = currentLevelWords[parseInt(card.dataset.index)];
             speak(word.speak);
 
             if (card === selectedCard) { card.classList.remove('selected'); selectedCard = null; return; }
-
             if (!selectedCard) { card.classList.add('selected'); selectedCard = card; return; }
 
             const si = parseInt(selectedCard.dataset.index);
             const ci = parseInt(card.dataset.index);
 
             if (si === ci && selectedCard !== card) {
-                // 正确！
                 selectedCard.classList.remove('selected'); selectedCard.classList.add('matched');
                 card.classList.add('matched');
                 SmartScheduler.recordCorrect(word.en);
                 addCombo();
                 setTimeout(() => { speak('Great! ' + word.en, 0.8, 1.3); }, 300);
                 addScore(10 + combo * 2, event.clientX || 200, event.clientY || 200);
-                showToast('太棒了！' + word.cn + (combo >= 3 ? ' 🔥x' + combo : ''));
+                showToast('Great! ' + word.cn + (combo >= 3 ? ' 🔥x' + combo : ''));
                 matchedPairs++; levelCurrent++;
                 updateLevelProgress(); selectedCard = null;
 
@@ -1043,13 +1100,12 @@
                     setTimeout(() => { onLevelComplete(); }, 800);
                 }
             } else {
-                // 错误
                 card.classList.add('wrong'); selectedCard.classList.add('wrong');
                 SmartScheduler.recordWrong(currentLevelWords[si].en);
                 SmartScheduler.recordWrong(currentLevelWords[ci].en);
                 resetCombo();
                 speak('Try again', 0.8, 1);
-                showToast('再试一次！先听清楚~');
+                showToast('Try again! Listen carefully~');
                 freezeGame(1200);
                 setTimeout(() => {
                     card.classList.remove('wrong'); selectedCard.classList.remove('wrong');
@@ -1059,12 +1115,13 @@
         }
 
         // ============================================================
-        // 读一读模块（新学优先展示）
+        // Read Aloud
         // ============================================================
         function initReadGame() {
             const container = document.getElementById('readCards'); container.innerHTML = '';
-            // 读一读展示所有单词，但按 needScore 排序（需要练习的在前面）
             const displayWords = SmartScheduler.selectForLevel(15, contentFilter);
+            readTapCount = 0;
+            updateReadProgress();
             displayWords.forEach((word, index) => {
                 const div = document.createElement('div');
                 div.className = 'card read-card ' + (word.category === 'new' ? 'new-tag' : word.category === 'review' ? 'review-tag' : '');
@@ -1077,25 +1134,26 @@
                     setTimeout(() => this.classList.remove('playing'), 1000);
                     addScore(2, e.clientX || 200, e.clientY || 200);
                     SmartScheduler.recordCorrect(word.en);
+                    readTapCount++;
+                    updateReadProgress();
                 });
                 container.appendChild(div);
             });
         }
 
         // ============================================================
-        // 拼一拼模块（智能选择弱词）
+        // Spell Game
         // ============================================================
         function initSpellGame() {
             currentSpellIndex = 0;
-            // 优先选择拼写错误多的词
             const weakWords = SmartScheduler.getWeakWords(5).map(x => x.word).filter(Boolean);
             const newWords = words_new.slice(0, 3);
             const spellPool = [...newWords, ...weakWords, ...words_review.slice(0, 3)];
-            // 去重
             const unique = [];
             const seen = new Set();
             spellPool.forEach(w => { if (!seen.has(w.en)) { seen.add(w.en); unique.push(w); } });
-            currentLevelWords = unique.slice(0, 8); // 8个拼写词
+            currentLevelWords = unique.slice(0, 8);
+            updateSpellProgress();
             loadSpellWord();
         }
         function loadSpellWord() {
@@ -1103,10 +1161,10 @@
             if (!word) { currentSpellIndex = 0; loadSpellWord(); return; }
             document.getElementById('spellEmoji').textContent = word.emoji;
             document.getElementById('spellCn').textContent = word.cn;
-            document.getElementById('spellEnHint').textContent = word.category === 'new' ? '🌟 新学内容' : word.category === 'review' ? '📝 复习内容' : '📚 已掌握';
+            document.getElementById('spellEnHint').textContent = word.category === 'new' ? '🌟 New' : word.category === 'review' ? '📝 Review' : '📚 Mastered';
             const slotsContainer = document.getElementById('spellSlots');
             slotsContainer.innerHTML = '';
-            const letters = word.en.replace(/\s/g, '').split(''); // 去掉空格
+            const letters = word.en.replace(/\s/g, '').split('');
             filledSlots = new Array(letters.length).fill(null);
             letters.forEach((_, i) => {
                 const slot = document.createElement('div'); slot.className = 'letter-slot'; slot.dataset.index = i;
@@ -1127,6 +1185,7 @@
                 btn.addEventListener('click', function() { onLetterClick(this.dataset.letter, this); });
                 pool.appendChild(btn);
             });
+            updateSpellProgress();
         }
         function onLetterClick(letter, btn) {
             const emptyIndex = filledSlots.findIndex(s => s === null);
@@ -1170,14 +1229,14 @@
             if (spelled.toLowerCase() === correct) {
                 SmartScheduler.recordCorrect(word.en); addCombo();
                 speak('Perfect! ' + word.speak, 0.8, 1.4);
-                showToast('拼写正确！' + (combo >= 3 ? ' 🔥x' + combo : ''));
+                showToast('Perfect! ' + (combo >= 3 ? ' 🔥x' + combo : ''));
                 addScore(15 + combo * 3, 200, 300);
                 setTimeout(() => {
                     if (currentSpellIndex < currentLevelWords.length - 1) {
-                        showCelebration('拼对啦！', word.en + ' - ' + word.cn, 'next-spell');
+                        showCelebration('Correct!', word.en + ' - ' + word.cn, 'next-spell');
                         currentSpellIndex++; loadSpellWord();
                     } else {
-                        showCelebration('拼写完成！', '你是拼写小能手！', 'next-spell', '⭐⭐⭐');
+                        showCelebration('All Done!', 'You are a spelling master!', 'next-spell', '⭐⭐⭐');
                         speak('Amazing! You are awesome!', 0.8, 1.5);
                         PlayerProfile.addXP(40);
                         currentSpellIndex = 0; loadSpellWord();
@@ -1185,7 +1244,7 @@
                 }, 1000);
             } else {
                 SmartScheduler.recordWrong(word.en); resetCombo();
-                speak('Try again', 0.8, 1); showToast('再试一次！');
+                speak('Try again', 0.8, 1); showToast('Try again!');
                 freezeGame(800);
                 document.querySelectorAll('.letter-slot').forEach(slot => {
                     slot.style.animation = 'shake 0.5s ease'; setTimeout(() => slot.style.animation = '', 500);
@@ -1194,15 +1253,15 @@
         }
 
         // ============================================================
-        // 造句乐模块（优先新学句型）
+        // Sentence Game
         // ============================================================
         function initSentenceGame() {
             currentSentenceIndex = 0;
-            // 新学句型在前
             const newSentences = sentences.filter(s => s.words.indexOf('seven') !== -1 || s.words.indexOf('small') !== -1 || s.words.indexOf('green') !== -1);
             const reviewSentences = sentences.filter(s => newSentences.indexOf(s) === -1);
             const ordered = [...newSentences, ...reviewSentences];
-            currentLevelWords = ordered; // 复用变量存储句型
+            currentLevelWords = ordered;
+            updateSentenceProgress();
             loadSentence();
         }
         function loadSentence() {
@@ -1233,6 +1292,7 @@
                 btn.addEventListener('click', function() { onWordClick(this.dataset.word, this); });
                 pool.appendChild(btn);
             });
+            updateSentenceProgress();
         }
         function onWordClick(word, btn) {
             const emptyIndex = filledSentenceSlots.findIndex(s => s === null);
@@ -1275,14 +1335,14 @@
             if (built === correct) {
                 addCombo();
                 speak('Great! ' + s.speak, 0.8, 1.4);
-                showToast('造句正确！' + (combo >= 3 ? ' 🔥x' + combo : ''));
+                showToast('Correct! ' + (combo >= 3 ? ' 🔥x' + combo : ''));
                 addScore(20 + combo * 4, 200, 300);
                 setTimeout(() => {
                     if (currentSentenceIndex < currentLevelWords.length - 1) {
-                        showCelebration('造句成功！', s.speak, 'next-sentence');
+                        showCelebration('Great!', s.speak, 'next-sentence');
                         currentSentenceIndex++; loadSentence();
                     } else {
-                        showCelebration('全部完成！', '你是造句小能手！', 'next-sentence', '⭐⭐⭐');
+                        showCelebration('All Done!', 'You are a sentence master!', 'next-sentence', '⭐⭐⭐');
                         speak('Amazing! You are awesome!', 0.8, 1.5);
                         PlayerProfile.addXP(50);
                         currentSentenceIndex = 0; loadSentence();
@@ -1290,7 +1350,7 @@
                 }, 1000);
             } else {
                 resetCombo();
-                speak('Try again', 0.8, 1); showToast('再试一次！');
+                speak('Try again', 0.8, 1); showToast('Try again!');
                 freezeGame(800);
                 document.querySelectorAll('.sentence-slot').forEach(slot => {
                     slot.style.animation = 'shake 0.5s ease'; setTimeout(() => slot.style.animation = '', 500);
@@ -1299,7 +1359,7 @@
         }
 
         // ============================================================
-        // 庆祝弹窗（增强版）
+        // Celebration Modal
         // ============================================================
         function showCelebration(title, subtitle, action, starStr) {
             celebrationAction = action || null;
@@ -1308,13 +1368,13 @@
             document.getElementById('celebrationStars').textContent = starStr || '';
             document.getElementById('celebrationEmoji').textContent = starStr && starStr.includes('⭐⭐⭐') ? '🏆' : '🎉';
             const btnNext = document.getElementById('btnNext');
-            btnNext.textContent = action === 'restart-match' ? '🔄 下一关' : '继续挑战 ➡️';
+            btnNext.textContent = action === 'restart-match' ? '🔄 Next Level' : 'Continue ➡️';
             document.getElementById('celebration').classList.add('active');
         }
         function closeCelebration() { document.getElementById('celebration').classList.remove('active'); }
 
         // ============================================================
-        // 学习报告
+        // Learning Report
         // ============================================================
         function showReport() {
             const stats = SmartScheduler.getStats();
@@ -1326,7 +1386,7 @@
             const weakWords = SmartScheduler.getWeakWords(5);
             const container = document.getElementById('reportWeakWords');
             if (weakWords.length === 0) {
-                container.innerHTML = '<div style="text-align:center;color:#48bb78;padding:10px;">🎉 暂无弱项，继续加油！</div>';
+                container.innerHTML = '<div style="text-align:center;color:#48bb78;padding:10px;">🎉 All good, keep going!</div>';
             } else {
                 container.innerHTML = weakWords.map(w => {
                     const m = w.correct + w.wrong;
@@ -1340,7 +1400,40 @@
         function closeReport() { document.getElementById('reportModal').classList.remove('active'); }
 
         // ============================================================
-        // 初始化
+        // History Review
+        // ============================================================
+        function showHistory() {
+            const container = document.getElementById('historyWordsList');
+            const categories = [
+                { label: '🌟 New Words (' + words_new.length + ')', words: words_new },
+                { label: '📝 Review Words (' + words_review.length + ')', words: words_review },
+                { label: '📚 Old Words (' + words_old.length + ')', words: words_old }
+            ];
+            let html = '';
+            categories.forEach(cat => {
+                html += '<div style="font-weight:bold;color:#667eea;margin:10px 0 5px;">' + cat.label + '</div>';
+                cat.words.forEach(w => {
+                    const m = SmartScheduler.getMastery(w.en);
+                    const total = m.correct + m.wrong;
+                    const rate = total > 0 ? Math.round(m.correct / total * 100) : 0;
+                    html += '<div class="report-word-item" style="cursor:pointer;padding:6px;background:#f7fafc;border-radius:8px;margin:3px 0;" onclick="speak(\'' + w.speak.replace(/'/g, "\\'") + '\',0.8,1.2)"';
+                    html += '><span>' + w.emoji + ' ' + w.en + ' = ' + w.cn + '</span>';
+                    if (total > 0) {
+                        const color = rate < 50 ? '#e53e3e' : rate < 80 ? '#d69e2e' : '#48bb78';
+                        html += '<span style="font-size:11px;color:' + color + '">' + rate + '%</span>';
+                    } else {
+                        html += '<span style="font-size:11px;color:#999">Not practiced</span>';
+                    }
+                    html += '</div>';
+                });
+            });
+            container.innerHTML = html;
+            document.getElementById('historyModal').classList.add('active');
+        }
+        function closeHistory() { document.getElementById('historyModal').classList.remove('active'); }
+
+        // ============================================================
+        // Initialization
         // ============================================================
         function startGame() {
             enableAudio();
@@ -1358,10 +1451,11 @@
 
             document.getElementById('startScreen').classList.add('hidden');
             initMatchGame(); initReadGame(); initSpellGame(); initSentenceGame();
+            switchModule('read'); // default to read
 
             setTimeout(function() {
                 speak('Welcome to Robot Trip. Let us learn English words.', 0.8, 1.3);
-                showToast('🎮 游戏开始！先听发音，再选择');
+                showToast('🎮 Game on! Listen first, then choose');
             }, 800);
         }
 
@@ -1371,7 +1465,6 @@
             document.querySelectorAll('.tab-btn').forEach(function(btn) {
                 btn.addEventListener('click', function() { switchModule(this.dataset.module); });
             });
-            // 内容筛选
             document.querySelectorAll('.content-tab').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.content-tab').forEach(b => b.classList.remove('active'));
@@ -1393,7 +1486,8 @@
                 } else { closeCelebration(); }
             });
             document.getElementById('btnCloseReport').addEventListener('click', closeReport);
-            // 双击分数板查看报告
+            document.getElementById('historyBtn').addEventListener('click', showHistory);
+            document.getElementById('btnCloseHistory').addEventListener('click', closeHistory);
             document.querySelector('.score-board').addEventListener('dblclick', showReport);
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.getVoices();
