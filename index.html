@@ -841,30 +841,28 @@
             if (!('speechSynthesis' in window)) { playOnlineTTS(text); return; }
             if (!isAudioEnabled) enableAudio();
 
-            // Ensure speech synthesis is active on mobile devices
+            // Mobile: must speak synchronously inside user gesture, no setTimeout
             try {
                 if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+                window.speechSynthesis.cancel();
             } catch(e) {}
 
             var hasEn = hasEnglishVoice();
             if (!hasEn) { playOnlineTTS(text); return; }
 
             try {
-                window.speechSynthesis.cancel();
-                setTimeout(function() {
-                    var u = new SpeechSynthesisUtterance(text);
-                    u.lang = 'en-US'; u.rate = rate; u.pitch = pitch; u.volume = 1;
-                    if (englishVoice) u.voice = englishVoice;
-                    var started = false;
-                    u.onstart = function() { started = true; };
-                    u.onerror = function(e) {
-                        if (e.error === 'canceled' || e.error === 'interrupted') return;
-                        if (!started) playOnlineTTS(text);
-                    };
-                    window.speechSynthesis.speak(u);
-                    // Longer timeout for Android/slow devices
-                    setTimeout(function() { if (!started) playOnlineTTS(text); }, 1000);
-                }, 100);
+                var u = new SpeechSynthesisUtterance(text);
+                u.lang = 'en-US'; u.rate = rate; u.pitch = pitch; u.volume = 1;
+                if (englishVoice) u.voice = englishVoice;
+                var started = false;
+                u.onstart = function() { started = true; };
+                u.onerror = function(e) {
+                    if (e.error === 'canceled' || e.error === 'interrupted') return;
+                    if (!started) playOnlineTTS(text);
+                };
+                window.speechSynthesis.speak(u);
+                // Longer timeout for Android/slow devices
+                setTimeout(function() { if (!started) playOnlineTTS(text); }, 1000);
             } catch(e) { playOnlineTTS(text); }
         }
         function hasEnglishVoice() {
