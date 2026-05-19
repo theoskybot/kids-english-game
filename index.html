@@ -1280,7 +1280,12 @@
         // ============================================================
         function initSentenceGame() {
             currentSentenceIndex = 0;
-            const newSentences = sentences.filter(s => s.words.indexOf('seven') !== -1 || s.words.indexOf('small') !== -1 || s.words.indexOf('green') !== -1);
+            // New sentences: 5.19 Jill & Bill + 5.15 car/seven series
+            const newSentences = sentences.filter(s =>
+                s.words.indexOf('Jill') !== -1 || s.words.indexOf('Bill') !== -1 ||
+                s.words.indexOf('seven') !== -1 || s.words.indexOf('small') !== -1 ||
+                s.words.indexOf('green') !== -1
+            );
             const reviewSentences = sentences.filter(s => newSentences.indexOf(s) === -1);
             const ordered = [...newSentences, ...reviewSentences];
             currentLevelWords = ordered;
