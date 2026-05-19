@@ -577,45 +577,53 @@
         // ============================================================
         // Word Data - New / Review / Old
         // ============================================================
-        // 5.15 New content (phrases + seven series)
+        // 5.19 New content (Jill & Bill likes)
         const words_new = [
-            { en: 'a small car', cn: '一辆小的汽车', emoji: '🚗', speak: 'a small car', category: 'new' },
-            { en: 'a big car', cn: '一辆大的汽车', emoji: '🚙', speak: 'a big car', category: 'new' },
-            { en: 'a green car', cn: '一辆绿色的汽车', emoji: '🟢🚗', speak: 'a green car', category: 'new' },
-            { en: 'a red car', cn: '一辆红色的汽车', emoji: '🔴🚗', speak: 'a red car', category: 'new' },
-            { en: 'seven', cn: '七', emoji: '7️⃣', speak: 'seven', category: 'new' },
-            { en: 'seven cars', cn: '七辆汽车', emoji: '🚗7️⃣', speak: 'seven cars', category: 'new' },
-            { en: 'seven balloons', cn: '七个气球', emoji: '🎈7️⃣', speak: 'seven balloons', category: 'new' },
-            { en: 'seven circles', cn: '七个圆圈', emoji: '⭕7️⃣', speak: 'seven circles', category: 'new' },
-            { en: 'seven teddy bears', cn: '七只泰迪熊', emoji: '🧸7️⃣', speak: 'seven teddy bears', category: 'new' },
+            { en: 'dogs', cn: '狗', emoji: '🐕', speak: 'dogs', category: 'new' },
+            { en: 'frogs', cn: '青蛙', emoji: '🐸', speak: 'frogs', category: 'new' },
+            { en: 'trees', cn: '树', emoji: '🌳', speak: 'trees', category: 'new' },
+            { en: 'bees', cn: '蜜蜂', emoji: '🐝', speak: 'bees', category: 'new' },
+            { en: 'shell', cn: '贝壳', emoji: '🐚', speak: 'shell', category: 'new' },
+            { en: 'bells', cn: '铃铛', emoji: '🔔', speak: 'bells', category: 'new' },
+            { en: 'planes', cn: '飞机', emoji: '✈️', speak: 'planes', category: 'new' },
+            { en: 'trains', cn: '火车', emoji: '🚂', speak: 'trains', category: 'new' },
+            { en: 'bikes', cn: '自行车', emoji: '🚲', speak: 'bikes', category: 'new' },
+            { en: 'hikes', cn: '徒步', emoji: '🥾', speak: 'hikes', category: 'new' },
+            { en: 'snakes', cn: '蛇', emoji: '🐍', speak: 'snakes', category: 'new' },
+            { en: 'cakes', cn: '蛋糕', emoji: '🍰', speak: 'cakes', category: 'new' },
         ];
 
-        // Previous lesson (review)
+        // 5.15 content (review)
         const words_review = [
-            { en: 'this', cn: '这个（近的）', emoji: '👇', speak: 'this', category: 'review' },
-            { en: 'that', cn: '那个（远的）', emoji: '👉', speak: 'that', category: 'review' },
-            { en: 'small', cn: '小的', emoji: '🔹', speak: 'small', category: 'review' },
-            { en: 'big', cn: '大的', emoji: '🔷', speak: 'big', category: 'review' },
-            { en: 'green', cn: '绿色', emoji: '🟢', speak: 'green', category: 'review' },
-            { en: 'red', cn: '红色', emoji: '🔴', speak: 'red', category: 'review' },
-            { en: 'scooter', cn: '滑板车', emoji: '🛴', speak: 'scooter', category: 'review' },
-            { en: 'puppet', cn: '木偶', emoji: '🎎', speak: 'puppet', category: 'review' },
-            { en: 'train', cn: '火车', emoji: '🚂', speak: 'train', category: 'review' },
-            { en: 'ball', cn: '球', emoji: '⚽', speak: 'ball', category: 'review' },
+            { en: 'a small car', cn: '一辆小的汽车', emoji: '🚗', speak: 'a small car', category: 'review' },
+            { en: 'a big car', cn: '一辆大的汽车', emoji: '🚙', speak: 'a big car', category: 'review' },
+            { en: 'a green car', cn: '一辆绿色的汽车', emoji: '🟢🚗', speak: 'a green car', category: 'review' },
+            { en: 'a red car', cn: '一辆红色的汽车', emoji: '🔴🚗', speak: 'a red car', category: 'review' },
+            { en: 'seven', cn: '七', emoji: '7️⃣', speak: 'seven', category: 'review' },
+            { en: 'seven cars', cn: '七辆汽车', emoji: '🚗7️⃣', speak: 'seven cars', category: 'review' },
+            { en: 'seven balloons', cn: '七个气球', emoji: '🎈7️⃣', speak: 'seven balloons', category: 'review' },
+            { en: 'seven circles', cn: '七个圆圈', emoji: '⭕7️⃣', speak: 'seven circles', category: 'review' },
+            { en: 'seven teddy bears', cn: '七只泰迪熊', emoji: '🧸7️⃣', speak: 'seven teddy bears', category: 'review' },
         ];
 
         // Older content
         const words_old = [
+            { en: 'this', cn: '这个（近的）', emoji: '👇', speak: 'this', category: 'old' },
+            { en: 'that', cn: '那个（远的）', emoji: '👉', speak: 'that', category: 'old' },
+            { en: 'small', cn: '小的', emoji: '🔹', speak: 'small', category: 'old' },
+            { en: 'big', cn: '大的', emoji: '🔷', speak: 'big', category: 'old' },
+            { en: 'green', cn: '绿色', emoji: '🟢', speak: 'green', category: 'old' },
+            { en: 'red', cn: '红色', emoji: '🔴', speak: 'red', category: 'old' },
+            { en: 'scooter', cn: '滑板车', emoji: '🛴', speak: 'scooter', category: 'old' },
+            { en: 'puppet', cn: '木偶', emoji: '🎎', speak: 'puppet', category: 'old' },
+            { en: 'train', cn: '火车', emoji: '🚂', speak: 'train', category: 'old' },
+            { en: 'ball', cn: '球', emoji: '⚽', speak: 'ball', category: 'old' },
             { en: 'toy store', cn: '玩具商店', emoji: '🧸', speak: 'toy store', category: 'old' },
             { en: 'elephant', cn: '大象', emoji: '🐘', speak: 'elephant', category: 'old' },
             { en: 'cow', cn: '奶牛', emoji: '🐄', speak: 'cow', category: 'old' },
-            { en: 'orange', cn: '橙色', emoji: '🟠', speak: 'orange', category: 'old' },
-            { en: 'purple', cn: '紫色', emoji: '🟣', speak: 'purple', category: 'old' },
             { en: 'look', cn: '看', emoji: '👀', speak: 'look', category: 'old' },
             { en: 'like', cn: '喜欢', emoji: '👍', speak: 'like', category: 'old' },
-            { en: 'love', cn: '爱', emoji: '❤️', speak: 'love', category: 'old' },
             { en: 'blocks', cn: '积木', emoji: '🧱', speak: 'blocks', category: 'old' },
-            { en: 'dollhouse', cn: '娃娃屋', emoji: '🏠', speak: 'doll house', category: 'old' },
             { en: 'rain', cn: '下雨', emoji: '🌧️', speak: 'rain', category: 'old' },
             { en: 'snow', cn: '下雪', emoji: '❄️', speak: 'snow', category: 'old' },
             { en: 'white', cn: '白色', emoji: '⚪', speak: 'white', category: 'old' },
