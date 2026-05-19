@@ -840,8 +840,15 @@
             rate = rate || 0.8; pitch = pitch || 1.2;
             if (!('speechSynthesis' in window)) { playOnlineTTS(text); return; }
             if (!isAudioEnabled) enableAudio();
+
+            // Ensure speech synthesis is active on mobile devices
+            try {
+                if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+            } catch(e) {}
+
             var hasEn = hasEnglishVoice();
             if (!hasEn) { playOnlineTTS(text); return; }
+
             try {
                 window.speechSynthesis.cancel();
                 setTimeout(function() {
@@ -855,8 +862,9 @@
                         if (!started) playOnlineTTS(text);
                     };
                     window.speechSynthesis.speak(u);
-                    setTimeout(function() { if (!started) playOnlineTTS(text); }, 500);
-                }, 50);
+                    // Longer timeout for Android/slow devices
+                    setTimeout(function() { if (!started) playOnlineTTS(text); }, 1000);
+                }, 100);
             } catch(e) { playOnlineTTS(text); }
         }
         function hasEnglishVoice() {
