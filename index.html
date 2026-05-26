@@ -740,7 +740,15 @@
         // Sentence Data
         // ============================================================
         const sentences = [
-            // 5.19 New - Jill & Bill likes
+            // 5.26 New - Cupcake Colors
+            { cn: '纸杯蛋糕看见一只鸟。它也变成了红色。', scene: '🧁🐦🔴', words: ['The', 'cupcake', 'sees', 'a', 'bird', 'It', 'becomes', 'red', 'too'], speak: 'The cupcake sees a bird It becomes red too' },
+            { cn: '纸杯蛋糕看见一个湖。它也变成了蓝色。', scene: '🧁🏞️🔵', words: ['The', 'cupcake', 'sees', 'a', 'lake', 'It', 'becomes', 'blue', 'too'], speak: 'The cupcake sees a lake It becomes blue too' },
+            { cn: '纸杯蛋糕看见一条蛇。它也变成了黄色。', scene: '🧁🐍🟡', words: ['The', 'cupcake', 'sees', 'a', 'snake', 'It', 'becomes', 'yellow', 'too'], speak: 'The cupcake sees a snake It becomes yellow too' },
+            { cn: '纸杯蛋糕看见一棵树。它也变成了绿色。', scene: '🧁🌳🟢', words: ['The', 'cupcake', 'sees', 'a', 'tree', 'It', 'becomes', 'green', 'too'], speak: 'The cupcake sees a tree It becomes green too' },
+            { cn: '纸杯蛋糕看见一只蝴蝶。它也变成了橙色。', scene: '🧁🦋🟠', words: ['The', 'cupcake', 'sees', 'a', 'butterfly', 'It', 'becomes', 'orange', 'too'], speak: 'The cupcake sees a butterfly It becomes orange too' },
+            { cn: '纸杯蛋糕看见一朵花。它也变成了紫色。', scene: '🧁🌸🟣', words: ['The', 'cupcake', 'sees', 'a', 'flower', 'It', 'becomes', 'purple', 'too'], speak: 'The cupcake sees a flower It becomes purple too' },
+            { cn: '纸杯蛋糕看见一条彩虹。它也变成了很多种颜色。', scene: '🧁🌈✨', words: ['The', 'cupcake', 'sees', 'a', 'rainbow', 'It', 'becomes', 'many', 'colors', 'too'], speak: 'The cupcake sees a rainbow It becomes many colors too' },
+            // 5.19 Review - Jill & Bill likes
             { cn: 'Jill喜欢狗', scene: '👧🐕', words: ['Jill', 'likes', 'dogs'], speak: 'Jill likes dogs' },
             { cn: 'Bill喜欢青蛙', scene: '👦🐸', words: ['Bill', 'likes', 'frogs'], speak: 'Bill likes frogs' },
             { cn: 'Jill喜欢树', scene: '👧🌳', words: ['Jill', 'likes', 'trees'], speak: 'Jill likes trees' },
@@ -753,7 +761,7 @@
             { cn: 'Bill喜欢徒步', scene: '👦🥾', words: ['Bill', 'likes', 'hikes'], speak: 'Bill likes hikes' },
             { cn: 'Jill喜欢蛇', scene: '👧🐍', words: ['Jill', 'likes', 'snakes'], speak: 'Jill likes snakes' },
             { cn: 'Bill喜欢蛋糕', scene: '👦🍰', words: ['Bill', 'likes', 'cakes'], speak: 'Bill likes cakes' },
-            // 5.15 Review - car series + seven
+            // 5.15 Old - car series + seven
             { cn: '一辆小的汽车', scene: '🔹🚗', words: ['a', 'small', 'car'], speak: 'a small car' },
             { cn: '一辆大的汽车', scene: '🔷🚙', words: ['a', 'big', 'car'], speak: 'a big car' },
             { cn: '一辆绿色的汽车', scene: '🟢🚗', words: ['a', 'green', 'car'], speak: 'a green car' },
@@ -1309,8 +1317,9 @@
         // ============================================================
         function initSentenceGame() {
             currentSentenceIndex = 0;
-            // New sentences: 5.19 Jill & Bill + 5.15 car/seven series
+            // New sentences: 5.26 Cupcake Colors + 5.19 Jill & Bill + 5.15 car/seven
             const newSentences = sentences.filter(s =>
+                s.words.indexOf('cupcake') !== -1 ||
                 s.words.indexOf('Jill') !== -1 || s.words.indexOf('Bill') !== -1 ||
                 s.words.indexOf('seven') !== -1 || s.words.indexOf('small') !== -1 ||
                 s.words.indexOf('green') !== -1
