@@ -580,22 +580,21 @@
         // ============================================================
         // Word Data - New / Review / Old
         // ============================================================
-        // 5.26 New content (Cupcake Colors)
+        // 5.31 New content (Teddy Bear)
         const words_new = [
-            { en: 'cupcake', cn: '纸杯蛋糕', emoji: '🧁', speak: 'cupcake', category: 'new' },
-            { en: 'bird', cn: '鸟', emoji: '🐦', speak: 'bird', category: 'new' },
-            { en: 'lake', cn: '湖', emoji: '🏞️', speak: 'lake', category: 'new' },
+            { en: 'around', cn: '在…的周围', emoji: '🔄', speak: 'around', category: 'new' },
+            { en: 'ground', cn: '地面', emoji: '🌍', speak: 'ground', category: 'new' },
+            { en: 'hips', cn: '臀部', emoji: '🍑', speak: 'hips', category: 'new' },
+            { en: 'kiss', cn: '亲吻', emoji: '💋', speak: 'kiss', category: 'new' },
+            { en: 'Mike', cn: '麦克', emoji: '👦', speak: 'Mike', category: 'new' },
+            { en: 'lamp', cn: '台灯', emoji: '💡', speak: 'lamp', category: 'new' },
+            { en: 'mug', cn: '鬼脸', emoji: '😜', speak: 'mug', category: 'new' },
+            { en: 'meat', cn: '肉', emoji: '🥩', speak: 'meat', category: 'new' },
+            { en: 'mouse', cn: '老鼠', emoji: '🐭', speak: 'mouse', category: 'new' },
+            { en: 'man', cn: '男人', emoji: '👨', speak: 'man', category: 'new' },
             { en: 'snake', cn: '蛇', emoji: '🐍', speak: 'snake', category: 'new' },
-            { en: 'tree', cn: '树', emoji: '🌳', speak: 'tree', category: 'new' },
-            { en: 'butterfly', cn: '蝴蝶', emoji: '🦋', speak: 'butterfly', category: 'new' },
-            { en: 'flower', cn: '花', emoji: '🌸', speak: 'flower', category: 'new' },
-            { en: 'rainbow', cn: '彩虹', emoji: '🌈', speak: 'rainbow', category: 'new' },
-            { en: 'red', cn: '红色', emoji: '🔴', speak: 'red', category: 'new' },
-            { en: 'blue', cn: '蓝色', emoji: '🔵', speak: 'blue', category: 'new' },
-            { en: 'yellow', cn: '黄色', emoji: '🟡', speak: 'yellow', category: 'new' },
-            { en: 'green', cn: '绿色', emoji: '🟢', speak: 'green', category: 'new' },
-            { en: 'orange', cn: '橙色', emoji: '🟠', speak: 'orange', category: 'new' },
-            { en: 'purple', cn: '紫色', emoji: '🟣', speak: 'purple', category: 'new' },
+            { en: 'sandwich', cn: '三明治', emoji: '🥪', speak: 'sandwich', category: 'new' },
+            { en: 'soup', cn: '汤', emoji: '🍲', speak: 'soup', category: 'new' },
         ];
 
         // 5.23 content (a, e, i, o, u) → review
@@ -610,6 +609,21 @@
             { en: 'octopus', cn: '章鱼', emoji: '🐙', speak: 'octopus', category: 'review' },
             { en: 'u', cn: '字母u', emoji: '🔤', speak: 'u', category: 'review' },
             { en: 'umbrella', cn: '雨伞', emoji: '☂️', speak: 'umbrella', category: 'review' },
+            // 5.26 → review (Cupcake Colors)
+            { en: 'cupcake', cn: '纸杯蛋糕', emoji: '🧁', speak: 'cupcake', category: 'review' },
+            { en: 'bird', cn: '鸟', emoji: '🐦', speak: 'bird', category: 'review' },
+            { en: 'lake', cn: '湖', emoji: '🏞️', speak: 'lake', category: 'review' },
+            { en: 'snake', cn: '蛇', emoji: '🐍', speak: 'snake', category: 'review' },
+            { en: 'tree', cn: '树', emoji: '🌳', speak: 'tree', category: 'review' },
+            { en: 'butterfly', cn: '蝴蝶', emoji: '🦋', speak: 'butterfly', category: 'review' },
+            { en: 'flower', cn: '花', emoji: '🌸', speak: 'flower', category: 'review' },
+            { en: 'rainbow', cn: '彩虹', emoji: '🌈', speak: 'rainbow', category: 'review' },
+            { en: 'red', cn: '红色', emoji: '🔴', speak: 'red', category: 'review' },
+            { en: 'blue', cn: '蓝色', emoji: '🔵', speak: 'blue', category: 'review' },
+            { en: 'yellow', cn: '黄色', emoji: '🟡', speak: 'yellow', category: 'review' },
+            { en: 'green', cn: '绿色', emoji: '🟢', speak: 'green', category: 'review' },
+            { en: 'orange', cn: '橙色', emoji: '🟠', speak: 'orange', category: 'review' },
+            { en: 'purple', cn: '紫色', emoji: '🟣', speak: 'purple', category: 'review' },
         ];
 
         // 5.19 content (Jill & Bill likes) → old
@@ -743,6 +757,11 @@
         // Sentence Data
         // ============================================================
         const sentences = [
+            // 5.31 New - Teddy Bear
+            { cn: '泰迪熊，泰迪熊，转个圈。', scene: '🧸🔄', words: ['Teddy', 'bear', 'turn', 'around'], speak: 'Teddy bear Teddy bear turn around' },
+            { cn: '泰迪熊，泰迪熊，摸摸地面。', scene: '🧸👇', words: ['Teddy', 'bear', 'touch', 'the', 'ground'], speak: 'Teddy bear Teddy bear touch the ground' },
+            { cn: '泰迪熊，泰迪熊，摇摇屁股。', scene: '🧸💃', words: ['Teddy', 'bear', 'shake', 'your', 'hips'], speak: 'Teddy bear Teddy bear shake your hips' },
+            { cn: '泰迪熊，泰迪熊，吹个吻。', scene: '🧸💋', words: ['Teddy', 'bear', 'blow', 'a', 'kiss'], speak: 'Teddy bear Teddy bear blow a kiss' },
             // 5.26 New - Cupcake Colors
             { cn: '纸杯蛋糕看见一只鸟。它也变成了红色。', scene: '🧁🐦🔴', words: ['The', 'cupcake', 'sees', 'a', 'bird', 'It', 'becomes', 'red', 'too'], speak: 'The cupcake sees a bird It becomes red too' },
             { cn: '纸杯蛋糕看见一个湖。它也变成了蓝色。', scene: '🧁🏞️🔵', words: ['The', 'cupcake', 'sees', 'a', 'lake', 'It', 'becomes', 'blue', 'too'], speak: 'The cupcake sees a lake It becomes blue too' },
