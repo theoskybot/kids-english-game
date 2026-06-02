@@ -1348,16 +1348,9 @@
         // ============================================================
         function initSentenceGame() {
             currentSentenceIndex = 0;
-            // New sentences: 5.26 Cupcake Colors + 5.19 Jill & Bill + 5.15 car/seven
-            const newSentences = sentences.filter(s =>
-                s.words.indexOf('cupcake') !== -1 ||
-                s.words.indexOf('Jill') !== -1 || s.words.indexOf('Bill') !== -1 ||
-                s.words.indexOf('seven') !== -1 || s.words.indexOf('small') !== -1 ||
-                s.words.indexOf('green') !== -1
-            );
-            const reviewSentences = sentences.filter(s => newSentences.indexOf(s) === -1);
-            const ordered = [...newSentences, ...reviewSentences];
-            currentLevelWords = ordered;
+            // Use array order directly: new sentences at top (first ~8), review/old below
+            // No hardcoded filtering - rely on array order in sentences definition
+            currentLevelWords = sentences.slice();
             updateSentenceProgress();
             loadSentence();
         }
