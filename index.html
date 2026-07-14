@@ -580,23 +580,31 @@
         // ============================================================
         // Word Data - New / Review / Old
         // ============================================================
-        // 7.7 New content (Look at Spot! - clothes)
+        // 7.14 New content (Unit 5 Lesson 1 - Places)
         const words_new = [
-            { en: 'Spot', cn: '小玻', emoji: '🐕', speak: 'Spot', category: 'new' },
-            { en: 'hat', cn: '帽子', emoji: '🎩', speak: 'hat', category: 'new' },
-            { en: 'scarf', cn: '围巾', emoji: '🧣', speak: 'scarf', category: 'new' },
-            { en: 'mittens', cn: '手套', emoji: '🧤', speak: 'mittens', category: 'new' },
-            { en: 'socks', cn: '袜子', emoji: '🧦', speak: 'socks', category: 'new' },
-            { en: 'boots', cn: '靴子', emoji: '👢', speak: 'boots', category: 'new' },
-            { en: 'coat', cn: '外套', emoji: '🧥', speak: 'coat', category: 'new' },
-            { en: 'hot', cn: '热的', emoji: '🔥', speak: 'hot', category: 'new' },
-            { en: 'look at', cn: '看', emoji: '👀', speak: 'look at', category: 'new' },
-            { en: 'wear', cn: '穿/戴', emoji: '👔', speak: 'wear', category: 'new' },
+            { en: 'supermarket', cn: '超市', emoji: '🏪', speak: 'supermarket', category: 'new' },
+            { en: 'hospital', cn: '医院', emoji: '🏥', speak: 'hospital', category: 'new' },
+            { en: 'restaurant', cn: '饭店', emoji: '🍽️', speak: 'restaurant', category: 'new' },
+            { en: 'police station', cn: '警察局', emoji: '🚓', speak: 'police station', category: 'new' },
+            { en: 'fire station', cn: '消防站', emoji: '🚒', speak: 'fire station', category: 'new' },
+            { en: 'policeman', cn: '警察', emoji: '👮', speak: 'policeman', category: 'new' },
+            { en: 'firefighter', cn: '消防员', emoji: '👨‍🚒', speak: 'firefighter', category: 'new' },
         ];
 
         // 5.23 content (a, e, i, o, u) → review
         const words_review = [
-            { en: 'a', cn: '字母a', emoji: '🔤', speak: 'a', category: 'review' },
+            // 7.7 → review (Look at Spot! - clothes)
+            { en: 'Spot', cn: '小玻', emoji: '🐕', speak: 'Spot', category: 'review' },
+            { en: 'hat', cn: '帽子', emoji: '🎩', speak: 'hat', category: 'review' },
+            { en: 'scarf', cn: '围巾', emoji: '🧣', speak: 'scarf', category: 'review' },
+            { en: 'mittens', cn: '手套', emoji: '🧤', speak: 'mittens', category: 'review' },
+            { en: 'socks', cn: '袜子', emoji: '🧦', speak: 'socks', category: 'review' },
+            { en: 'boots', cn: '靴子', emoji: '👢', speak: 'boots', category: 'review' },
+            { en: 'coat', cn: '外套', emoji: '🧥', speak: 'coat', category: 'review' },
+            { en: 'hot', cn: '热的', emoji: '🔥', speak: 'hot', category: 'review' },
+            { en: 'look at', cn: '看', emoji: '👀', speak: 'look at', category: 'review' },
+            { en: 'wear', cn: '穿/戴', emoji: '👔', speak: 'wear', category: 'review' },
+            // 5.23 content (a, e, i, o, u) → review
             { en: 'apple', cn: '苹果', emoji: '🍎', speak: 'apple', category: 'review' },
             { en: 'e', cn: '字母e', emoji: '🔤', speak: 'e', category: 'review' },
             { en: 'elephant', cn: '大象', emoji: '🐘', speak: 'elephant', category: 'review' },
@@ -783,6 +791,11 @@
         // Sentence Data
         // ============================================================
         const sentences = [
+            // 7.14 New - Places (Unit 5 Lesson 1)
+            { cn: '我们可以在超市买杂物。', scene: '🏪🛒', words: ['We', 'can', 'buy', 'groceries', 'in', 'the', 'supermarket'], speak: 'We can buy groceries in the supermarket' },
+            { cn: '警察在警察局。', scene: '👮🚓', words: ['The', 'policeman', 'is', 'in', 'the', 'police', 'station'], speak: 'The policeman is in the police station' },
+            { cn: '消防员在消防站。', scene: '👨‍🚒🚒', words: ['The', 'firefighters', 'are', 'in', 'the', 'fire', 'station'], speak: 'The firefighters are in the fire station' },
+            { cn: '我们在餐厅吃饭。', scene: '🍽️🍜', words: ['We', 'eat', 'in', 'the', 'restaurant'], speak: 'We eat in the restaurant' },
             // 6.2 New - Sprinkle, Winkle
             { cn: '撒呀，闪呀！现在神奇的纸杯蛋糕变大了。', scene: '🧁✨🔷', words: ['Sprinkle', 'winkle', 'Now', 'the', 'magic', 'cupcake', 'is', 'big'], speak: 'Sprinkle winkle! Now the magic cupcake is big.' },
             { cn: '撒呀，闪呀！现在神奇的纸杯蛋糕变小了。', scene: '🧁✨🔹', words: ['Sprinkle', 'winkle', 'Now', 'the', 'magic', 'cupcake', 'is', 'small'], speak: 'Sprinkle winkle! Now the magic cupcake is small.' },
